@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4 mx-auto" style="max-width: 500px;">
+  <h3 class="mb-3 text-center">Registrar Usuário</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success w-100">Registrar</button>
+  </form>
+  <p class="text-center mt-3">
+    Já tem conta?
+    <a href="{% url 'login' %}">Entrar</a>
+  </p>
+</div>
+{% endblock %}

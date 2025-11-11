@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard Administrativo</h2>
+
+<div class="row text-center mt-4">
+  <div class="col-md-4">
+    <div class="card bg-primary text-light p-3 shadow">
+      <h4>{{ total_startups }}</h4>
+      <p>Startups Cadastradas</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card bg-success text-light p-3 shadow">
+      <h4>{{ total_usuarios }}</h4>
+      <p>Usuários Registrados</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card bg-info text-light p-3 shadow">
+      <h4>{{ total_votos }}</h4>
+      <p>Votos Totais</p>
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-5">Ranking das Startups</h4>
+<table class="table table-hover table-striped shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>Startup</th>
+      <th>Votos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in ranking %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ s.nome }}</td>
+      <td>{{ s.total_votos }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

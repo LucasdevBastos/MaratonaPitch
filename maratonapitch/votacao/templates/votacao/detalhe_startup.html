@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4">
+  <h3>{{ startup.nome }}</h3>
+  <p class="text-muted">{{ startup.area_atuacao }}</p>
+  <p>{{ startup.descricao }}</p>
+  <p><strong>Integrantes:</strong> {{ startup.integrantes }}</p>
+
+  <hr>
+  <p>
+    <strong>Votos:</strong> {{ startup.total_votos }} <br>
+    <strong>Status:</strong>
+    {% if startup.is_votacao_aberta %}
+      <span class="text-success">Votação Aberta</span>
+    {% else %}
+      <span class="text-danger">Encerrada</span>
+    {% endif %}
+  </p>
+
+  {% if user.is_authenticated %}
+    {% if startup.is_votacao_aberta %}
+      {% if usuario_votou %}
+        <button class="btn btn-secondary" disabled>✅ Você já votou</button>
+      {% else %}
+        <a href="{% url 'votar_startup' startup.pk %}" class="btn btn-success">🗳️ Votar nesta Startup</a>
+      {% endif %}
+    {% else %}
+      <button class="btn btn-outline-secondary" disabled>Votação encerrada</button>
+    {% endif %}
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary">Entre para votar</a>
+  {% endif %}
+</div>
+
+<hr>
+<h4>Comentários</h4>
+<ul class="list-group mb-3">
+  {% for c in comentarios %}
+  <li class="list-group-item">
+    <strong>{{ c.usuario.get_full_name|default:c.usuario.username }}</strong>
+    <small class="text-muted"> - {{ c.criado_em|date:"d/m H:i" }}</small>
+    <br>
+    {{ c.texto }}
+  </li>
+  {% empty %}
+  <li class="list-group-item">Nenhum comentário ainda.</li>
+  {% endfor %}
+</ul>
+
+{% if user.is_authenticated and startup.is_votacao_aberta %}
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <textarea name="texto" class="form-control" rows="3" placeholder="Deixe seu comentário..."></textarea>
+  </div>
+  <button formaction="{% url 'comentar_startup' startup.pk %}" class="btn btn-outline-primary">💬 Comentar</button>
+</form>
+{% endif %}
+{% endblock %}

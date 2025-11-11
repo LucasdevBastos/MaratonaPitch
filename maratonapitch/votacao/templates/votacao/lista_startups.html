@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-3">Startups em Votação</h2>
+
+<table class="table table-striped align-middle shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>Startup</th>
+      <th>Área</th>
+      <th>Votos</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in startups %}
+    <tr>
+      <td>{{ s.nome }}</td>
+      <td>{{ s.area_atuacao }}</td>
+      <td>{{ s.total_votos }}</td>
+      <td>
+        <a href="{% url 'detalhe_startup' s.pk %}" class="btn btn-sm btn-primary">
+          Detalhes
+        </a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Nenhuma startup cadastrada.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

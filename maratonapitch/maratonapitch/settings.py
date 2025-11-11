@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'votacao',
+    
+    'votacao.apps.VotacaoConfig',
     'accounts',
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'maratonapitch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'maratonapitch' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
