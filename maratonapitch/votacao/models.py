@@ -9,7 +9,6 @@ class Startup(models.Model):
     integrantes = models.CharField(max_length=255, blank=True)
     area_atuacao = models.CharField(max_length=150, blank=True)
     is_votacao_aberta = models.BooleanField(default=False)
-
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -18,6 +17,7 @@ class Startup(models.Model):
     @property
     def total_votos(self):
         return self.votos.count()
+
 
 
 class Voto(models.Model):

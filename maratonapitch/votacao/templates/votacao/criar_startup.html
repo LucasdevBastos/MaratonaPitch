@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow p-4 mx-auto" style="max-width: 900px;">
+  <h3 class="mb-3">Cadastro de Startup - Maratona Pitch</h3>
+  <p class="text-muted">
+    Preencha as informações abaixo para cadastrar uma startup participante da Batalha de Startups / Maratona Tech.
+    Este formulário deve ser preenchido pela organização/coordenação.
+  </p>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- Nome da Startup -->
+    <div class="mb-3">
+      <label class="form-label"><strong>Nome da Startup</strong></label>
+      <input type="text" name="nome" class="form-control" required
+             placeholder="Informe o nome oficial da equipe/startup.">
+    </div>
+
+    <!-- Integrantes -->
+    <div class="mb-3">
+      <label class="form-label">
+        <strong>Membros da equipe (nome completo + matrícula)</strong>
+      </label>
+      <small class="form-text text-muted d-block">
+        Informe o nome completo de todos os membros da equipe, com suas respectivas matrículas,
+        separados por linha. Mínimo de 2 e máximo de 5 membros.
+      </small>
+      <textarea name="integrantes" class="form-control" rows="4" required
+                placeholder="Exemplo:
+João Silva - Matrícula 20230001
+Maria Souza - Matrícula 20230002
+..."></textarea>
+    </div>
+
+    <!-- Descrição da ideia -->
+    <div class="mb-3">
+      <label class="form-label"><strong>Descrição da ideia empreendedora</strong></label>
+      <small class="form-text text-muted d-block">
+        Descreva de forma clara a proposta da startup, o que ela faz e qual é sua proposta de valor.
+      </small>
+      <textarea name="descricao_ideia" class="form-control" rows="4" required
+                placeholder="Explique a solução proposta pela equipe."></textarea>
+    </div>
+
+    <!-- Problema de mercado -->
+    <div class="mb-3">
+      <label class="form-label">
+        <strong>Problema de mercado que a ideia pretende solucionar</strong>
+      </label>
+      <small class="form-text text-muted d-block">
+        Descreva qual dor, necessidade ou desafio real do mercado a solução ataca.
+      </small>
+      <textarea name="problema_mercado" class="form-control" rows="3" required
+                placeholder="Explique o problema identificado no mercado."></textarea>
+    </div>
+
+    <!-- Divisão da equipe -->
+    <div class="mb-3">
+      <label class="form-label">
+        <strong>Divisão dos membros da equipe e funções</strong>
+      </label>
+      <small class="form-text text-muted d-block">
+        Informe como os membros estão organizados (ex.: negócio, tecnologia, design, marketing),
+        destacando as principais habilidades técnicas da equipe.
+      </small>
+      <textarea name="divisao_equipe" class="form-control" rows="3" required
+                placeholder="Exemplo:
+João - Líder de Projeto / Negócios
+Maria - Desenvolvedora Backend
+Pedro - UX/UI Designer
+..."></textarea>
+    </div>
+
+    <!-- Diferencial competitivo -->
+    <div class="mb-3">
+      <label class="form-label">
+        <strong>Diferencial em relação aos concorrentes</strong>
+      </label>
+      <small class="form-text text-muted d-block">
+        Explique o que torna a ideia única ou melhor do que soluções já existentes
+        (inovação, custo, tecnologia, experiência do usuário, impacto socioambiental etc.).
+      </small>
+      <textarea name="diferencial" class="form-control" rows="3" required
+                placeholder="Descreva os principais diferenciais competitivos da startup."></textarea>
+    </div>
+
+    <!-- Status da votação -->
+    <div class="form-check form-switch mb-3">
+      <input class="form-check-input" type="checkbox" name="is_votacao_aberta" id="votacaoAbertaSwitch">
+      <label class="form-check-label" for="votacaoAbertaSwitch">
+        Deixar votação desta startup aberta imediatamente
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100">Cadastrar Startup</button>
+  </form>
+</div>
+{% endblock %}
